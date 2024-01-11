@@ -1,0 +1,61 @@
+crear proyecto con vite
+  console
+    yarn create vite  
+      crear en react - JS 
+        renombrar carpeta 
+          en carpeta (yarn install )
+            yarn dev
+
+  visual studio 
+    istalar y ajustar dependencias 
+      HTML, bootstrap, React Router Doom@6
+        crear mi componente PRINCIAPAL, (CalendarApp)
+           file. sltyles...
+           renderizar mi componente PRINCIPAL (CalendarApp), desde el main.jsx
+
+    Configurar RUTAS 
+      login - registro
+        crear y organizar los directorios auth, calendar
+          files-componentes:
+            LoginPage
+            calendarPage
+
+        crear folder de RUTAS -ROUTER
+          > FC AppRouter.jsx
+            <CalendarApp/> - renderiza <AppRouter/>
+
+            <AppRouter/>
+              <Routes>  de react router doom (mostrará las rutas )</Routes>
+                <Route tiene el path del elemento que se va a mostrar /auth/*  />
+            
+          definir el ROUTER
+            se coloca en el punto más alto de la app.  
+              <CalendarApp/>
+                 envolver el <AppRouter/> con el <BrowserRouter/>
+        
+        en el navegador definir el path que se definió en en AppRouter con el <Route/> http://localhost:5173/auth/ para que sea renderizada. /auth/
+
+        ____________________________________________________________________________________________________________________________________________________________
+        ____________________________________________________________________________________________________________________________________________________________
+
+            
+
+          
+
+
+
+
+
+
+
+
+Functional component: FC
+
+
+
+
+
+
+
+
+
