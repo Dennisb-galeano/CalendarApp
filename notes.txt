@@ -38,16 +38,13 @@ crear proyecto con vite
         ____________________________________________________________________________________________________________________________________________________________
         ____________________________________________________________________________________________________________________________________________________________
 
-            
+  Font-Awesome: es un framework de iconos vectoriales y estilos css.  https://www.aquihaydominios.com/blog/font-awesom-que-es-y-como-se-usa/
+  cdn para colocar iconos rapidamente en la app https://cdnjs.com/libraries/font-awesome
+  
+  react-big-calendar: instalar con yarn. (validar doc para config)
+    dateFnsLocalizer: me permite cambiar el idioma     
 
           
-
-
-
-
-
-
-
 
 Functional component: FC
 
