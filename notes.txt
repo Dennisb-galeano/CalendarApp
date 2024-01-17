@@ -1,3 +1,5 @@
+
+***NUEVO PROYECTO Y REACT ROUTER DOOM***
 crear proyecto con vite
   console
     yarn create vite  
@@ -41,9 +43,16 @@ crear proyecto con vite
   Font-Awesome: es un framework de iconos vectoriales y estilos css.  https://www.aquihaydominios.com/blog/font-awesom-que-es-y-como-se-usa/
   cdn para colocar iconos rapidamente en la app https://cdnjs.com/libraries/font-awesome
   
-  react-big-calendar: instalar con yarn. (validar doc para config)
-    dateFnsLocalizer: me permite cambiar el idioma     
+  ***react-big-calendar*** 
+  https://www.npmjs.com/package/react-big-calendar?activeTab=readme
+  
+    instalar con yarn: yarn add react-big-calendar (validar doc para config)
+     usar la config de date-fns v2 (moment no se recomienda)
+       VS. CalendarPage.jsx
+        importar dateFnsLocalizer: paquete externo me permite cambiar el idioma     
 
+      config dependencia de calendar:  yarn add date-fns    (no tiene dependencias externas,ofrece cosas directamente de JS )
+        el error UNSAFE es del calendar , sin el modo estricto sale solo una advertencia en la consola.
           
 
 Functional component: FC
