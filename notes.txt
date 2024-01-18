@@ -58,6 +58,8 @@ crear proyecto con vite
 Functional component: FC
 
 
+helpers: en este folder va a conterner importaciones y cod de JS  para disminuir el peso del componente. en este caso en el CalendarPage
+
 
 
 

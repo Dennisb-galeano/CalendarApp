@@ -8,6 +8,7 @@ export const NavBar = () => {
       <div className="navbar navbar-dark bg-dark mb-4 px-4">
         <span className="navbar-brand">   {/* hace que aparezca en blanco,  */}
           <i className="fas fa-calendar-alt"> </i> {/*font-awsome: la etiqueta<i> icono de calendario</i> -alt"letra alternativa"" */}
+          &nbsp;         
           Encito precioso
         </span>
         <button className="btn btn-outline-info">
