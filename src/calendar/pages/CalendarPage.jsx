@@ -9,6 +9,7 @@ import { addHours } from 'date-fns';
 import { NavBar } from "../components/NavBar";
 import { localizer } from '../../helpers/calendarLocalizer';
 import { getMessagesEs } from '../getMessages';
+import { CalendarEventBox } from '../components/CalendarEventBox';
 
 
 //se le pueden agregar los eventos con la data que desee, la UNICA OBLIGATORIA ES EL TITTLE, EL START Y EL END
@@ -20,10 +21,9 @@ const events = [{
   bgColor: '#fafafa',
   user: {  //se le pueden agregar los eventos con la data que desee, la UNICA OBLIGATORIA ES EL TITTLE, EL START Y EL END
     _id: '123',
-    name: 'Enzo'
+    name: 'cheuz'
   }
 }];
-
 
 
 
@@ -32,7 +32,7 @@ export const CalendarPage = () => {
 
   //esta fn me maneja el estilo de los eventos del calendario
   const eventStyleGetter = ( event,start, final, isSelected) => { //son los nombres de los arg qie se quieren dar, estan definidos en el calendar
-    console.log({event,start, final, isSelected});
+    // console.log({event,start, final, isSelected});
 
     const style={
       backgroundColor: '#020819',
@@ -60,7 +60,12 @@ export const CalendarPage = () => {
         style={ {height: 500 }} //calcule el 100% del view hight y restele 80px  '100vh - 80px'
         messages={ getMessagesEs() }  //fn en los helper getMessages.js
         eventPropGetter={ eventStyleGetter} //el evento del calendario me muestra uqe eventos se disparan con ella
-     /> 
+        components={{
+          event: CalendarEventBox // esta mandando la ref al copm calendarEventBox (no se manda como componente, espera un srtring, pero se recibe igual)
+         }}
+        
+        //componentes se pueden especificar un objeto donde esten todos los posibles eventos o componentes que se pueden sobreescribir, es. cambiar la fecha la hora, el dia
+   /> 
 
     </>
 
