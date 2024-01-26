@@ -9,7 +9,7 @@ export const CalendarEventBox = ({ event} ) => {  //del evento se va a usar el u
   return (
     <>
     <span>{ user.name}</span>
-    <strong> - { title} </strong>
+    <strong>- { title} </strong>
 
     </>
   )
