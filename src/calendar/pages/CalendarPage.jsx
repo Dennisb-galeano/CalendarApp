@@ -2,15 +2,16 @@
 //AppRouter tiene la validacion de si esta o no auntenticado
 //se hace la instalacion y config de React-big-calendar https://www.npmjs.com/package/react-big-calendar?activeTab=readme
 
+import { useState } from 'react';
 import { Calendar } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css'; // doc CSS de react-big-calendar
 
 import { addHours } from 'date-fns';
 import { NavBar } from "../components/NavBar";
+import { CalendarEventBox } from '../components/CalendarEventBox';
+import { CalendarModal } from '../components/CalendarModal';
 import { localizer } from '../../helpers/calendarLocalizer';
 import { getMessagesEs } from '../getMessages';
-import { CalendarEventBox } from '../components/CalendarEventBox';
-import { useState } from 'react';
 
 
 //se le pueden agregar los eventos con la data que desee, la UNICA OBLIGATORIA ES EL TITTLE, EL START Y EL END
@@ -85,11 +86,13 @@ export const CalendarPage = () => {
         onDoubleClickEvent={onDoubleClick} //los que emita el onSelectClick lo va a recibir el onDoubleClick
         onSelectEvent={onSelectClick}
         onView={onViewchanged}
-      />
 
+      />
+      <CalendarModal/>
+        
     </>
 
-  )
+  )  
 }
 
 

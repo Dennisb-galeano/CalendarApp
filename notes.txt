@@ -55,11 +55,19 @@ crear proyecto con vite
         el error UNSAFE es del calendar , sin el modo estricto sale solo una advertencia en la consola.
           
 
+        
+
 Functional component: FC
 
 
 helpers: en este folder va a conterner importaciones y cod de JS  para disminuir el peso del componente. en este caso en el CalendarPage
 
+
+modal con npm: https://www.npmjs.com/package/react-modal no tiene dependencias externas
+  es un HOC 
+
+
+react-datepicker : https://www.npmjs.com/package/react-datepicker  permite al usuario seleccionar una fecha escribiendo en un campo de texto o mediante un control Calendar desplegable. es un recuadro de calendario que permite al usuario seleccionar las fechas. en un mini calendario
 
 
 
