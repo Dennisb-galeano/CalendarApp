@@ -68,7 +68,8 @@ modal con npm: https://www.npmjs.com/package/react-modal no tiene dependencias e
 
 
 react-datepicker : https://www.npmjs.com/package/react-datepicker  permite al usuario seleccionar una fecha escribiendo en un campo de texto o mediante un control Calendar desplegable. es un recuadro de calendario que permite al usuario seleccionar las fechas. en un mini calendario
-
+  instalacion: yarn add react-datepicker
+    crear newDate , fecha inicio y fin
 
 
 
