@@ -2,11 +2,16 @@
 //se utilza en el calendar page
 
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
+import { addHours, differenceInSeconds } from 'date-fns';
+
 import Modal from 'react-modal';
-import { addHours } from 'date-fns';
 import DatePicker, { registerLocale } from 'react-datepicker'; //componente, se ca a usar en las fechas,, registerLocale: fn que necisto para cambiar lenguaje
 import "react-datepicker/dist/react-datepicker.css";  //estilos del datePicker
+
+import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
+
 import es from 'date-fns/locale/es';
 
 registerLocale('es', es);
@@ -26,7 +31,8 @@ Modal.setAppElement('#root'); //la informacion q contiene, es la info del ELEMEN
 
 export const CalendarModal = () => {
 
-  const [isModalOpen, setisModalOpen] = useState(true)//un modal se debe manejar desde un store global,por di necesito abrirla en otros lugares
+  const [isModalOpen, setisModalOpen] = useState(true);//un modal se debe manejar desde un store global,por di necesito abrirla en otros lugares
+  const [formSubmitted, setformSubmitted] = useState(false); //Si el titulo es incorrecto no me permita postear-submit // como esta en false. no se ha hecho el submit del formulario, y va a cambiar cuando la persona intente subir el formulario
 
   //manejo del formulario tradicional - unsando la config de React-modal
   //realizar las conecciones del state con el formulario, en el input, formValues.xxx
@@ -37,7 +43,19 @@ export const CalendarModal = () => {
     notes: 'soy hermoso',
     start: new Date(),  //react-modal requiere fecha inicio y fecha fin
     end: addHours(new Date(), 2), //agregarle 2 horas a la fecha con el addHours- se importan de 'date-fns'
-  })
+  });
+
+  const titleClass = useMemo(() => { // este hook lo uso en el input, para dar el color verdeo rojo uqeme informa si el  titulo cumple con las condiciones
+     if (!!formSubmitted) return ''; //si formsubmit.. no se ha disparado, entonces return string vacio, si se disp.
+
+      return( formValues.title.length > 2 )
+        ?'is-valid'
+        :'is-invalid';
+
+    }, [ formValues.title, formSubmitted]); //2 dependencias 1.vuelve a memorizar si el titulo cambia 2. si el formSubmitted cambia 
+      //el valor del tittle class se va a guardar solo si el titulo o el formSubmitt cambia  
+
+
 
   //asi actualiuzo el valor que viene el el target, lo uso en el titulo y en notes . con el onchange
   const onInputChanged = ({ target }) => {  //recibo el (event).. pero se va a desestructurar de aho el target ({ target})
@@ -58,9 +76,27 @@ export const CalendarModal = () => {
   const onCloseModal = () => {
     console.log('cerrando el Modal');
     setisModalOpen(false); //cierra el modal,con el use state y modal isModalOpen
-
   }
 
+  //posteo del formulario - va a recibirel evento del formulario, este se le manda al onSubit del Formulario. asi no hace refresh completo en las fechas y horario
+  const onSubmit = (event) => {
+    event.preventDefault(); //detener la propagacion  
+    setformSubmitted(true); //la persona trato de hacer el posteo, por eso se deja en true
+
+
+    //fecha final siemopre > a la inicial --- differenceInSeconds se importa de date-fns
+    const difference = differenceInSeconds(formValues.end, formValues.start);
+
+    if (isNaN(difference) || difference <= 0) { //NaN - fecha no permitida o no exiset ya es de JS NO SE DEBE IMPORTAR NADA
+      Swal.fire('Fechas incorrectas', 'Revisa las fechas ingresadas', 'error');
+      return;
+    }
+
+    if (formValues.title.length <= 0) return;
+
+    console.log(formValues);
+
+  }
 
   return (
 
@@ -76,7 +112,7 @@ export const CalendarModal = () => {
 
       <h1> Nuevo evento </h1>
       <hr />
-      <form className="container">
+      <form className="container" onSubmit={onSubmit}>
 
         <div className="form-group mb-2">
           <label>Fecha y hora inicio</label>
@@ -85,7 +121,7 @@ export const CalendarModal = () => {
             onChange={(event) => onDateChanged(event, 'start')} //esra fn, me actualiza el valor selec en el calendario.Datepicker tiene el onchenge me va a dar el evento, uqe es la fecha que yo necesito llamar, el valor de la nueva fecha seleccioanda, creo fn onDateChanged, uqe recibe el evento(nueva fecha), el start o el end(changing)
             className='form-control'
             dateFormat='Pp' //hora minuto y seg
-            showTimeSelect//sale cuadro de seleccion de hora
+            showTimeSelect//propiedD - sale cuadro de seleccion de hora
             locale='es'
             timeCaption="Hora" //cambio de idioma toca manual 'Hora'
 
@@ -106,14 +142,15 @@ export const CalendarModal = () => {
             locale='es'
             timeCaption="Hora" //cambio de idioma toca manual 'Hora'
 
-          />    </div>
+          />
+        </div>
 
         <hr />
         <div className="form-group mb-2">
           <label>Titulo y notas</label>
           <input
             type="text"
-            className="form-control"
+            className={ `form-control ${titleClass}` } //punta rojo el cuadro, se va a controlar el is invalid con el use memo 
             placeholder="Título del evento"
             name="title"
             autoComplete="off"
