@@ -71,8 +71,26 @@ react-datepicker : https://www.npmjs.com/package/react-datepicker  permite al us
   instalacion: yarn add react-datepicker
     crear newDate , fecha inicio y fin
 
+____________________________________________________________________________________________________________________________________________________________
+
+REDUX TOOLKIT - https://redux-toolkit.js.org/introduction/getting-started#installation
+  instalacion
+    - yarn add @reduxjs/toolkit
+    - yarn add react-redux
+  
+  Crear los slices: ayudan a creacr acciones y reducer, states...
+    estan en la carpeta del store.
 
 
-
-
-
+  
+/*primera parte de config del toolkit
+  - en el life "store.js", crear fn store usando el configureStore
+    - crear file - uiSlices.js
+     Crear Slices - con los reducer  (folder dentro del store)
+      crear las acciones de los reducer
+          sninpet slice - reduxSlice
+          recucer, acciones ya se definen con ese snipet uqe se creo anteriormente, exportaracciomes
+  - Store.js: importar en ui el reducer del Slice  dentro del configure store. "ui: uiSlice.reducer"
+en la parte mas alta de mi proyecto (main ó calendarApp)
+  - importar FN <provider store={store} /> mandandole todo el store, por encima del browserRouter o todos los componentes
+  - VALIDAR DEVTOOLS en el navegador, debe contener lols valores del uiSlice, los valores del estado inicial "initialState"

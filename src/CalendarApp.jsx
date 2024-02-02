@@ -1,5 +1,7 @@
+import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { AppRouter } from "./router/AppRouter";
+import { store } from "./store/store";
 
 //este es el componente mas alto en mi app
 
@@ -7,10 +9,11 @@ import { AppRouter } from "./router/AppRouter";
 export const CalendarApp = () => {
   return (
     <>
-      <BrowserRouter>
-        <AppRouter />
-      </BrowserRouter>
+      <Provider store={store}>
+        <BrowserRouter>
+          <AppRouter />
+        </BrowserRouter>
+      </Provider>
     </>
   )
-
 }

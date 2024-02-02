@@ -7,7 +7,7 @@ import { addHours, differenceInSeconds } from 'date-fns';
 
 import Modal from 'react-modal';
 import DatePicker, { registerLocale } from 'react-datepicker'; //componente, se ca a usar en las fechas,, registerLocale: fn que necisto para cambiar lenguaje
-import "react-datepicker/dist/react-datepicker.css";  //estilos del datePicker
+import "react-datepicker/dist/react-datepicker.css"; //estilos del datePicker
 
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
