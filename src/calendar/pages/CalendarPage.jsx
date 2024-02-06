@@ -22,7 +22,7 @@ import { useCalendarStore } from '../../hooks/useCalendarStore';
 export const CalendarPage = () => {
   
   const{ openDateModal} = useUiStore(); //hook importado para el doble click, y voy a usar el metodo openDateModal, lo voy as usar en el evento onDoubleClik
-  const {events } = useCalendarStore();
+  const {events, setActiveEvent } = useCalendarStore();
 
   const [lastView, setlastView] = useState(localStorage.getItem('lastView') || 'month');//se coloca en el local storage para que almacene el valor requrido que esta en el onView
 
@@ -49,8 +49,10 @@ export const CalendarPage = () => {
     openDateModal();
   }
 
-  const onSelectClick = (event) => {
-    console.log({ click: event });
+  const onSelectClick = (event) => { //este evento activa el evento de lla nota
+    // console.log({ click: event });
+    setActiveEvent(event);
+
   }
 
   const onViewchanged = (event) => { //cuando cambia la vista ,, se usa el State

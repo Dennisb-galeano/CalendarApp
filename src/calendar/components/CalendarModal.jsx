@@ -2,7 +2,7 @@
 //se utilza en el calendar page
 
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { addHours, differenceInSeconds } from 'date-fns';
 
 import Modal from 'react-modal';
@@ -14,6 +14,7 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 
 import es from 'date-fns/locale/es';
 import { useUiStore } from '../../hooks/useUiStore';
+import { useCalendarStore } from '../../hooks/useCalendarStore';
 
 registerLocale('es', es);
 
@@ -34,6 +35,8 @@ export const CalendarModal = () => {
 
   const { isDateModalOpen,closeDateModal } = useUiStore(); //propiedad fn en es useUiStore
   const [formSubmitted, setformSubmitted] = useState(false); //Si el titulo es incorrecto no me permita postear-submit // como esta en false. no se ha hecho el submit del formulario, y va a cambiar cuando la persona intente subir el formulario
+  const { activeEvent } = useCalendarStore();
+
 
   //manejo del formulario tradicional - unsando la config de React-modal
   //realizar las conecciones del state con el formulario, en el input, formValues.xxx
@@ -57,6 +60,14 @@ export const CalendarModal = () => {
       //el valor del tittle class se va a guardar solo si el titulo o el formSubmitt cambia  
 
 
+      useEffect(() => {
+        if (activeEvent !== null){
+          setformValues({ ...activeEvent }) //fn del useState.. el spread rompe la ref... pasando las propiedades y creando un nuevo evento 
+
+        }
+
+      }, [ activeEvent]) //dependencia, el activeEvent, se toma del useCalendarStore. este efecgto se va a disparar cada vez que la nota cambie. PERO !! SI ES NULL 
+      
 
   //asi actualiuzo el valor que viene el el target, lo uso en el titulo y en notes . con el onchange
   const onInputChanged = ({ target }) => {  //recibo el (event).. pero se va a desestructurar de aho el target ({ target})
