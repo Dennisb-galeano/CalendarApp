@@ -13,6 +13,7 @@ import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 
 import es from 'date-fns/locale/es';
+import { useUiStore } from '../../hooks/useUiStore';
 
 registerLocale('es', es);
 
@@ -31,7 +32,7 @@ Modal.setAppElement('#root'); //la informacion q contiene, es la info del ELEMEN
 
 export const CalendarModal = () => {
 
-  const [isModalOpen, setisModalOpen] = useState(true);//un modal se debe manejar desde un store global,por di necesito abrirla en otros lugares
+  const { isDateModalOpen,closeDateModal } = useUiStore(); //propiedad fn en es useUiStore
   const [formSubmitted, setformSubmitted] = useState(false); //Si el titulo es incorrecto no me permita postear-submit // como esta en false. no se ha hecho el submit del formulario, y va a cambiar cuando la persona intente subir el formulario
 
   //manejo del formulario tradicional - unsando la config de React-modal
@@ -74,8 +75,9 @@ export const CalendarModal = () => {
 
 
   const onCloseModal = () => {
-    console.log('cerrando el Modal');
-    setisModalOpen(false); //cierra el modal,con el use state y modal isModalOpen
+    // console.log('cerrando el Modal');
+    closeDateModal();
+    // setisModalOpen(false); //cierra el modal,con el use state y modal isModalOpen
   }
 
   //posteo del formulario - va a recibirel evento del formulario, este se le manda al onSubit del Formulario. asi no hace refresh completo en las fechas y horario
@@ -101,11 +103,11 @@ export const CalendarModal = () => {
   return (
 
     <Modal
-      isOpen={isModalOpen} //el react-modal necesita cuiertas propiedades, como el isOpen que de debe determinar si se deja abierto o cerrado  
-      onRequestClose={onCloseModal} //es una fn uqe se va a disparar cuando se llame la forma de cerrar el MODAL "Dando click afuera o cerrandolo"
+      isOpen={isDateModalOpen} //como el isOpen que de debe determinar si se deja abierto o cerrado, se crea el hook useUiStore.js que me provee desde el store si el modal se encuentra abierto o no
+      onRequestClose={onCloseModal} //onrequiestClose, cierra el modal picando fuera de el en cualquier lugar
       style={customStyles}
-      className={'modal'}
-      overlayClassName={'modal-fondo'}
+      className='modal'
+      overlayClassName='modal-fondo'
       closeTimeoutMS={200} //para que se cierre el modal con la animacion que defini en modal.
     >
 

@@ -12,6 +12,7 @@ import { CalendarEventBox } from '../components/CalendarEventBox';
 import { CalendarModal } from '../components/CalendarModal';
 import { localizer } from '../../helpers/calendarLocalizer';
 import { getMessagesEs } from '../getMessages';
+import { useUiStore } from '../../hooks/useUiStore';
 
 
 //se le pueden agregar los eventos con la data que desee, la UNICA OBLIGATORIA ES EL TITTLE, EL START Y EL END
@@ -30,6 +31,8 @@ const events = [{
 
 
 export const CalendarPage = () => {
+  
+  const{ openDateModal} = useUiStore() //hook importado para el doble click, y voy a usar el metodo openDateModal, lo voy as usar en el evento onDoubleClik
 
   const [lastView, setlastView] = useState(localStorage.getItem('lastView') || 'month');//se coloca en el local storage para que almacene el valor requrido que esta en el onView
 
@@ -52,7 +55,8 @@ export const CalendarPage = () => {
 
   //conectar estos tres eventos cuando algo suceda en el calendar
   const onDoubleClick = (event) => {
-    console.log({ doubleClick: event });
+    // console.log({ doubleClick: event });
+    openDateModal();
   }
 
   const onSelectClick = (event) => {

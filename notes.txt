@@ -94,3 +94,8 @@ REDUX TOOLKIT - https://redux-toolkit.js.org/introduction/getting-started#instal
 en la parte mas alta de mi proyecto (main ó calendarApp)
   - importar FN <provider store={store} /> mandandole todo el store, por encima del browserRouter o todos los componentes
   - VALIDAR DEVTOOLS en el navegador, debe contener lols valores del uiSlice, los valores del estado inicial "initialState"
+
+____________________________________________________________________________________________________________________________________________________________
+
+Custom hook: manejar y hacer dispatch de acciones y controlar lo relacionado con el ui en el Store
+useSelector: tengo acceso al todo el state (hook de react)

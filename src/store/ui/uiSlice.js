@@ -8,18 +8,17 @@ import { createSlice } from '@reduxjs/toolkit';
 export const uiSlice = createSlice({
     name: 'ui',
     initialState: {
-        isDateModalOpen: false
+        isDateModalOpen: false //si se lococa en true, el modal aparecer desde el momento en uqe se recarga
     },
     reducers: { //acciones
-        onOpenDateModal: ( state) => { //cuando se quiera abrir el modal se llama
+        onOpenDateModal: ( state) => { //cuando se quiera abrir el modal se llama con un dispatch, en este caso se estan usando en el hook useUiStore
           state.isDateModalOpen = true; //toolik me permite mutar el codigo (me geneera un nuevo state)
         },
         onCloseDateModal: (state) =>{
-          state.onCloseDateModal = false;
+          state.isDateModalOpen = false;
         }
     }
 });
-
 
 // Action creators are generated for each case reducer function
 export const { onOpenDateModal, onCloseDateModal } = uiSlice.actions;
