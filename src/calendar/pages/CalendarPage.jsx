@@ -13,6 +13,7 @@ import { localizer } from '../../helpers/calendarLocalizer';
 import { getMessagesEs } from '../getMessages';
 import { useUiStore } from '../../hooks/useUiStore';
 import { useCalendarStore } from '../../hooks/useCalendarStore';
+import { FabAddNew } from '../components/FabAddNew';
 
 
 //se le pueden agregar los eventos con la data que desee, la UNICA OBLIGATORIA ES EL TITTLE, EL START Y EL END
@@ -85,6 +86,7 @@ export const CalendarPage = () => {
 
       />
       <CalendarModal/>
+       <FabAddNew/> {/*boton flotante */}
         
     </>
 

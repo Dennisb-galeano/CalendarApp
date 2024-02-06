@@ -42,9 +42,9 @@ export const CalendarModal = () => {
   //realizar las conecciones del state con el formulario, en el input, formValues.xxx
   //actualizar el formulario con del useState para uqe se refleje el cambio. creo una fn onInputChanged, que es usada en el onchange
   //importar el 
-  const [formValues, setformValues] = useState({
-    title: 'Encito',
-    notes: 'soy hermoso',
+  const [formValues, setformValues] = useState({ //cuando se crea un nuevo evento me saldra con la hora definida, unicamente
+    title: '',
+    notes: '',
     start: new Date(),  //react-modal requiere fecha inicio y fecha fin
     end: addHours(new Date(), 2), //agregarle 2 horas a la fecha con el addHours- se importan de 'date-fns'
   });

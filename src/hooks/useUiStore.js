@@ -13,7 +13,7 @@ export const useUiStore = () =>{
 
   const { isDateModalOpen} = useSelector( state => state.ui  ); //tengo acceso al state. y de ahi me interesa que me regrese el ui
 
-  const openDateModal = () =>{
+  const openDateModal = () =>{ //lo uso en FabAddNew.jsx
     dispatch( onOpenDateModal() ) //el onOpen.. esta dentroel store ... ui . en el uiSlice.js
     //para llegar a ese reducer necesit hacer el dispatc de una accion
   }
