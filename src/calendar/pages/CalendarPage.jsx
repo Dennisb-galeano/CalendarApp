@@ -6,33 +6,23 @@ import { useState } from 'react';
 import { Calendar } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css'; // doc CSS de react-big-calendar
 
-import { addHours } from 'date-fns';
 import { NavBar } from "../components/NavBar";
 import { CalendarEventBox } from '../components/CalendarEventBox';
 import { CalendarModal } from '../components/CalendarModal';
 import { localizer } from '../../helpers/calendarLocalizer';
 import { getMessagesEs } from '../getMessages';
 import { useUiStore } from '../../hooks/useUiStore';
+import { useCalendarStore } from '../../hooks/useCalendarStore';
 
 
 //se le pueden agregar los eventos con la data que desee, la UNICA OBLIGATORIA ES EL TITTLE, EL START Y EL END
-const events = [{
-  title: 'Cumpleaños Encito',
-  notes: 'Comprarle las Wischquitas',
-  start: new Date(), //momenti enn que empueza el evento
-  final: addHours(new Date(), 2), //puedo tomar un numero y una fecha y le sumo 2 horas 
-  bgColor: '#fafafa',
-  user: {  //se le pueden agregar los eventos con la data que desee, la UNICA OBLIGATORIA ES EL TITTLE, EL START Y EL END
-    _id: '123',
-    name: 'cheuz',
-  }
-}]
-
+//los eventos estan en el store
 
 
 export const CalendarPage = () => {
   
-  const{ openDateModal} = useUiStore() //hook importado para el doble click, y voy a usar el metodo openDateModal, lo voy as usar en el evento onDoubleClik
+  const{ openDateModal} = useUiStore(); //hook importado para el doble click, y voy a usar el metodo openDateModal, lo voy as usar en el evento onDoubleClik
+  const {events } = useCalendarStore();
 
   const [lastView, setlastView] = useState(localStorage.getItem('lastView') || 'month');//se coloca en el local storage para que almacene el valor requrido que esta en el onView
 

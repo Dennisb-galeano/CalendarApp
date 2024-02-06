@@ -96,6 +96,7 @@ en la parte mas alta de mi proyecto (main ó calendarApp)
   - VALIDAR DEVTOOLS en el navegador, debe contener lols valores del uiSlice, los valores del estado inicial "initialState"
 
 ____________________________________________________________________________________________________________________________________________________________
-
+dispatch de acciones ! 
 Custom hook: manejar y hacer dispatch de acciones y controlar lo relacionado con el ui en el Store
-useSelector: tengo acceso al todo el state (hook de react)
+useSelector: tengo acceso al todo el state (hook de react-redux) - nos permite extraer datos del store de Redux utilizando una función selectora, ésta debe ser pura ya que es potencialmente invocada múltiples veces.
+
