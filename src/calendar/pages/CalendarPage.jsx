@@ -14,6 +14,7 @@ import { getMessagesEs } from '../getMessages';
 import { useUiStore } from '../../hooks/useUiStore';
 import { useCalendarStore } from '../../hooks/useCalendarStore';
 import { FabAddNew } from '../components/FabAddNew';
+import { FabDeleteEvent } from '../components/FabDeleteEvent';
 
 
 //se le pueden agregar los eventos con la data que desee, la UNICA OBLIGATORIA ES EL TITTLE, EL START Y EL END
@@ -86,7 +87,9 @@ export const CalendarPage = () => {
 
       />
       <CalendarModal/>
-       <FabAddNew/> {/*boton flotante */}
+       <FabAddNew/> {/*boton flotante - agredar evento*/}
+       <FabDeleteEvent/> {/*boton flotante eliminar evento */}
+       
         
     </>
 

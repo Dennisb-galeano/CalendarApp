@@ -1,4 +1,6 @@
 // Floating Action Button (FAB) is a high-emphasis button that lets the user perform a primary action in an application
+//agregar un nuevo evento
+//agregar un nuevo evento
 
 import { addHours } from "date-fns";
 import { useCalendarStore } from "../../hooks/useCalendarStore";
