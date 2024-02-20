@@ -34,8 +34,9 @@ Modal.setAppElement('#root'); //la informacion q contiene, es la info del ELEMEN
 export const CalendarModal = () => {
 
   const { isDateModalOpen,closeDateModal } = useUiStore(); //propiedad fn en es useUiStore
+  const { activeEvent, startSavingEvent } = useCalendarStore(); //lo uso en el submit
+  
   const [formSubmitted, setformSubmitted] = useState(false); //Si el titulo es incorrecto no me permita postear-submit // como esta en false. no se ha hecho el submit del formulario, y va a cambiar cuando la persona intente subir el formulario
-  const { activeEvent } = useCalendarStore();
 
 
   //manejo del formulario tradicional - unsando la config de React-modal
@@ -92,7 +93,7 @@ export const CalendarModal = () => {
   }
 
   //posteo del formulario - va a recibirel evento del formulario, este se le manda al onSubit del Formulario. asi no hace refresh completo en las fechas y horario
-  const onSubmit = (event) => {
+  const onSubmit =async (event) => {
     event.preventDefault(); //detener la propagacion  
     setformSubmitted(true); //la persona trato de hacer el posteo, por eso se deja en true
 
@@ -108,6 +109,16 @@ export const CalendarModal = () => {
     if (formValues.title.length <= 0) return;
 
     console.log(formValues);
+
+    //todo 
+    await startSavingEvent(formValues); //si doso sale bien, (voy a llamar el formValues "que es el evento del calendario"
+    //cerrar el modal
+    closeDateModal();
+    setformSubmitted(false); //se deja en false para que cuando se grabe el titulo uqede en si estado ok
+
+
+
+    
 
   }
 

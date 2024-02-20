@@ -26,13 +26,18 @@ export const calendarSlice = createSlice({
     reducers: {
       onSetActiveEvent: ( state, {payload} ) => { //se recibe el state una accion de aho extraemos el {payload} . acá va a estar el id de la nota uqe quiero activar
         state.activeEvent = payload; //lo uqe le mande se va a activar por el null line 24
+      },
+      onAddNewEvent: ( state, {payload }) => { // en esta fn tengo el state y el action pero se ahi se desestructura el {payload}, este sería la nueva NOTA - lista para insertar a mis eventos 
+        state.events.push (payload);  //por el toolkit es que se puede hacer el push, sin este NO es posible, por la mutacion de codigo que me permite hacer.
+        state.activeEvent = null; //una vez se cierra el modal, hace una limpieza del evento activo
       }
+
     }
 });
 
 
 // Action creators are generated for each case reducer function
-export const { onSetActiveEvent } = calendarSlice.actions;
+export const { onSetActiveEvent,onAddNewEvent } = calendarSlice.actions;
 
 
 
