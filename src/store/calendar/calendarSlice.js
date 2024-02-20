@@ -30,14 +30,22 @@ export const calendarSlice = createSlice({
       onAddNewEvent: ( state, {payload }) => { // en esta fn tengo el state y el action pero se ahi se desestructura el {payload}, este sería la nueva NOTA - lista para insertar a mis eventos 
         state.events.push (payload);  //por el toolkit es que se puede hacer el push, sin este NO es posible, por la mutacion de codigo que me permite hacer.
         state.activeEvent = null; //una vez se cierra el modal, hace una limpieza del evento activo
-      }
+      },
+      onUpdateEvent: ( state, {payload} ) =>{ //(se usa en el useCalndarStore) tenemos el state, la accion y de ahi {se extrae el payload}, si yo estoy actualizando un evento (debe tener un id ), perooo tengo uqe saber cual es el evento uqe quiero actualizar o reemplazar. el tookkit me deja tomar los eventos y sobreesqcribirlos, se usa el .MAP ( regresa un nuevo arreglo basado en EL VALOR DE RETORNO de ese arreglo )
+        state.events = state.events.map ( event =>{
+          if(event._id === payload._id ) { //en el caso que el event.id sea exactamente igual a lo que me manda el payload regreso el payload ( es todo el evento activo)
+          return payload; //este serpia el nuevo evento
+        }
 
+        return event;
+        });
+      }
     }
 });
 
 
 // Action creators are generated for each case reducer function
-export const { onSetActiveEvent,onAddNewEvent } = calendarSlice.actions;
+export const { onSetActiveEvent,onAddNewEvent, onUpdateEvent } = calendarSlice.actions;
 
 
 
