@@ -104,3 +104,6 @@ useSelector: tengo acceso al todo el state (hook de react-redux) - nos permite e
 (FAB) Floating Action Button, clase fab. en css. componente FabAddNew.jsx 
 
 ordenar Lista css orden alfabetico = ctrl + shift + p + ascending
+
+El middleware es software que permite uno o más tipos de comunicación o conectividad entre aplicaciones o componentes de aplicaciones en una red distribuida.
+  es un tipo de software (middle significa “medio”) se coloca entre las diferentes aplicaciones y el sistema operativo que las tiene que ejecutar, con el objetivo de facilitar la comunicación de datos entre ellos.

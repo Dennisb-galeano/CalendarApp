@@ -6,9 +6,11 @@ export const store = configureStore ({
   reducer: {
     calendar: calendarSlice.reducer,
     ui: uiSlice.reducer //tengo que mandar el reducer, no el Slice directo
-
-  }
-
+  },
+  //configuracion DEL middleware usando redux toolkit
+  middleware: (GetDefaultMiddleware) => GetDefaultMiddleware({
+    serializableCheck:false //configuracion para que no revise las fechas, si la puede serializar
+  })
 })
 
 
@@ -24,5 +26,13 @@ export const store = configureStore ({
 en la parte mas alta de mi proyecto (main ó calendarApp)
   - importar FN <provider store={store} /> mandandole todo el store, por encima del browserRouter o todos los componentes
   - VALIDAR DEVTOOLS en el navegador, debe contener lols valores del uiSlice, los valores del estado inicial "initialState"
-
 */
+
+
+
+/* 
+El middleware es software que permite uno o más tipos de comunicación o conectividad entre aplicaciones o componentes de aplicaciones en una red distribuida.
+  es un tipo de software (middle significa “medio”) se coloca entre las diferentes aplicaciones y el sistema operativo que las tiene que ejecutar, con el objetivo de facilitar la comunicación de datos entre ellos.
+
+  CONFIGURACION DEL middleware; para solucionar issue "A non-serializable value was detected in the state, in the path: `calendar.events.0.start`. Value: Tue Feb 20 2024 18:35:09 GMT-0500 (hora estándar de Colombia) "
+  */
