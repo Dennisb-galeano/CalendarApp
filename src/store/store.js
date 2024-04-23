@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { uiSlice } from "./ui/uiSlice";
 import { calendarSlice } from "./calendar/calendarSlice";
+import { authSlice } from "./authSlice";
 
 export const store = configureStore ({
   reducer: {
+    auth:     authSlice.reducer, //se importa el auth slice al store, nos va a mantener el estado de la autenticacion en el store
     calendar: calendarSlice.reducer,
-    ui: uiSlice.reducer //tengo que mandar el reducer, no el Slice directo
+    ui:       uiSlice.reducer //tengo que mandar el reducer, no el Slice directo
   },
   //configuracion DEL middleware usando redux toolkit
   middleware: (GetDefaultMiddleware) => GetDefaultMiddleware({
