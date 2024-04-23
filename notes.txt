@@ -107,3 +107,6 @@ ordenar Lista css orden alfabetico = ctrl + shift + p + ascending
 
 El middleware es software que permite uno o más tipos de comunicación o conectividad entre aplicaciones o componentes de aplicaciones en una red distribuida.
   es un tipo de software (middle significa “medio”) se coloca entre las diferentes aplicaciones y el sistema operativo que las tiene que ejecutar, con el objetivo de facilitar la comunicación de datos entre ellos.
+
+  ____________________________________________________________________________________________________________________________________________________________
+  yarn add axios  : se utilizan para realizar la peticion para llegar a nuestro back y solicitar la UTENTICACION
