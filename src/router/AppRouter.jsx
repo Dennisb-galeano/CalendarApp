@@ -3,12 +3,14 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import {LoginPage } from "../auth/pages/LoginPage";
 import{ CalendarPage} from "../calendar/pages/CalendarPage";
+import { getEnvVariables } from "../helpers/getEnvVariables";
 
 
 export const AppRouter = () => {
 
   const authStatus = 'not-autenticated'; //'autenticated';
 
+console.log=( getEnvVariables());
   return (
     
     <Routes>

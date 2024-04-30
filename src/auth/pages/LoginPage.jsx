@@ -1,3 +1,4 @@
+import { useAuthStore } from '../../hooks/useAuthStore';
 import { useForm } from '../../hooks/useForm';
 import './LoginPage.css';
 
@@ -21,6 +22,7 @@ import './LoginPage.css';
 
 export const LoginPage = () => {
 
+     const {startLogin }= useAuthStore();
         
     const { loginEmail, loginPassword, onInputChange: onLoginInputChange  } = useForm( loginFormFields); // importa el use Form de los Custom Hooks. el estaado inicial sera (...). se cambia el nombre del onImputchange por que este va a manejar el estado que tiene el loginFormFields, y se va a crear otra variable con la misma informacion con el  registerFormFields, se cambia para poder usar las dos. luego de crear esta variable se realizan las conexiones respectivas en el return del formulario
 
@@ -28,12 +30,13 @@ export const LoginPage = () => {
 
     const loginSubmit = (event) => { //este on submit me va a permitir recibir los valores solicitados y realizar el submit de los mismos
         event.preventDefault();
-        console.log({ loginEmail, loginPassword });        
+        startLogin( { email: loginEmail, password: loginPassword }); // esta fn viene del useAuthStore, esta para uqe interaccione el aunth con el store
+        // console.log({ loginEmail, loginPassword });   
     }
 
     const registerFormSubmit = ( event ) =>{
         event.preventDefault();
-        console.log( { registerName, registerEmail, registerPassword, registerPassword2 });
+        console.log({ registerName, registerEmail, registerPassword, registerPassword2 });
     }
 
 
@@ -77,7 +80,7 @@ export const LoginPage = () => {
 
                 <div className="col-md-6 login-form-2">
                     <h3>Registro</h3>
-                    <form onSubmit={ registerFormSubmit}>
+                    <form onSubmit={registerFormSubmit}>
                         <div className="form-group mb-2">
                             <input
                                 type="text"
