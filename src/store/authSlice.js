@@ -24,10 +24,19 @@ export const authSlice = createSlice({
       state.status = 'authenticated'; //cuandi mande llamar este reducer, quiere decir uqe l apersona estaautenticada
       state.user = payload; //el state.user va a ser lo que recibo del payload
       state.errorMessage = undefined; //en caso que quiera limpiar
+    },
+    onLogout: (state, { payload}) => { 
+      state.status = 'not-authenticated';
+      state.user = {};
+      state.errorMessage = payload; //el error message, lo voy a extrar del payload,  
+    },
+    clearErrorMessage: (state) =>{ //limpiar el error
+      state.errorMessage = undefined;
     }
   }
+
 });
 
 
 // Action creators are generated for each case reducer function
-export const { onChecking, onLogin } = authSlice.actions;
+export const { onChecking, onLogin, onLogout, clearErrorMessage } = authSlice.actions;
