@@ -36,6 +36,32 @@ export const useAuthStore = () => {
   } 
 
 
+    //* crear un nuevo usuario 
+
+  const startRegister = async ({  name, email, password  }) => {
+    dispatch( onChecking()); //siempre se hace el dispatch de onCheking
+
+    try {
+      const { data } = await calendarApi.post('/auth/new', {name, email, password} );
+      localStorage.setItem('token', data.token ); //cuando todo sale bn obtenermos el token. solo necesito la data del token. se establece el 'token' en el local storage
+      localStorage.setItem('token-init-date', new Date().getTime() ); //la fecha de inicializacion . acaba de crear el token en esa fecha. y se puede almacenar la fecha como un newdate.. es representar como un entero la fecha actual.
+
+      dispatch( onLogin({name: data.name, uid: data.uid }) ); //la accion deonligion esta esperando un payload y este es el ususaiio del authSlice. en mi resp voy a tener el user:osea name y el uid: que seria la data , si todo asale ok es lo que se va a grabar 
+  
+
+    } catch (error) {
+      //para obtener el valor del error que (viene del back) en la response vieje la data y esa es la que vamos a obtener
+      dispatch( onLogout( error.response.data?.msg || '' ));  //el mensaje de error, si viene la data entonces envia el msg: 'que esta ene el back, si no el string vacio...o mensaje personalizado
+
+      setTimeout( () => { //se dispara despues de 10milesimas de seg... se limpia el mensaje
+        dispatch( clearErrorMessage() );
+      }, 10 ); 
+
+      
+    }
+  }
+
+
   return {
     //*properties - que voy a exponer al mundo exterior jaja
     errorMessage, 
@@ -44,6 +70,7 @@ export const useAuthStore = () => {
 
     //* metodos - acciones que van a poder llamar para interactuar con nuestro store (OTROS DESARROLLADORES)
     startLogin,
+    startRegister,
 
   }
 }

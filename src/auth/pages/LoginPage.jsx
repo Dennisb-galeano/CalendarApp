@@ -24,7 +24,7 @@ import Swal from 'sweetalert2';
 
 export const LoginPage = () => {
 
-     const {startLogin, errorMessage }= useAuthStore(); //para estar pendientes del error message se crea el useEffect
+     const {startLogin, errorMessage, startRegister }= useAuthStore(); //para estar pendientes del error message se crea el useEffect
         
     const { loginEmail, loginPassword, onInputChange: onLoginInputChange  } = useForm( loginFormFields); // importa el use Form de los Custom Hooks. el estaado inicial sera (...). se cambia el nombre del onImputchange por que este va a manejar el estado que tiene el loginFormFields, y se va a crear otra variable con la misma informacion con el  registerFormFields, se cambia para poder usar las dos. luego de crear esta variable se realizan las conexiones respectivas en el return del formulario
 
@@ -38,7 +38,11 @@ export const LoginPage = () => {
 
     const registerFormSubmit = ( event ) =>{
         event.preventDefault();
-        console.log({ registerName, registerEmail, registerPassword, registerPassword2 });
+        if( registerPassword !== registerPassword2 ) { //en caso que sean diferentes se envia el return
+            Swal.fire( 'Error en registro', 'Las Contraseñas no coinciden', 'error' );
+            return;
+        }
+        startRegister ({ name:registerName, email: registerEmail, password:registerPassword, });
     }
 
     useEffect(() => {
