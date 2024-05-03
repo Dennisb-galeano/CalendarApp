@@ -110,3 +110,7 @@ El middleware es software que permite uno o más tipos de comunicación o conect
 
   ____________________________________________________________________________________________________________________________________________________________
   yarn add axios  : se utilizan para realizar la peticion para llegar a nuestro back y solicitar la UTENTICACION
+
+    axios permite configurar interceptores: 
+      permiten interceptar las peticiones. las que van al back o las que regresan.
+      
