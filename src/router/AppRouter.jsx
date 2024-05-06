@@ -1,11 +1,11 @@
 //dentro del calendarApp vamos a renderizar el appRouter
 
+import { useEffect } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
+
 import { LoginPage } from "../auth/pages/LoginPage";
 import { CalendarPage } from "../calendar/pages/CalendarPage";
-import { getEnvVariables } from "../helpers/getEnvVariables";
 import { useAuthStore } from "../hooks/useAuthStore";
-import { useEffect } from "react";
 
 
 export const AppRouter = () => {
@@ -17,7 +17,7 @@ export const AppRouter = () => {
 
   useEffect(() => {
     checkAuthToken();
-  }, [])
+  }, []);
 
 
   if (status === 'checking') {
@@ -26,29 +26,31 @@ export const AppRouter = () => {
     )
   }
 
-  console.log = (getEnvVariables());
+
   return (
 
     <Routes>
       {
-        (status === 'not-autenticated') //vaamos a mostrar la ruta para el login, caso contrario
-          ? (  //si NO estoy autenticado
-          <>
-             <Route path="auth/*" element={<LoginPage />} />  {/* SI NO ! estoy auntetixado MANDAME A LOGINPAGE */}
-             <Route path="/*" element={<Navigate to="/auth/login" />} />
-          </>
+        (status === 'not-authenticated') //vaamos a mostrar la ruta para el login, caso contrario
+
+          ? (
+            <>
+              <Route path="/auth/*" element={<LoginPage />} />   {/* Ruta del Login - SI NO ! estoy auntetixado MANDAME A LOGINPAGE */}
+              <Route path="/*" element={<Navigate to="/auth/login" />} />
+            </>
           )
           : (
-              <>
-                <Route path="/" element={<CalendarPage />} />  {/* esta ruta va a navegar unicamente al calendar page, y cualquier otra ruta que no sea esta va a navegar a la ruta /  */}
-                <Route path="/*" element={<Navigate to="/" />} />
+            <>
+              <Route path="/" element={<CalendarPage />} /> {/* Ruta del calendarPage - de lo contrario - a calendar */}   
+              <Route path="/*" element={<Navigate to="/" />} />   {/* cualquier ruta que no sea "/" va a navegar a la ruta / */}
+            </>
+          )
 
-              </>
-            
-          )  
+   
+
+
+
       }
-
-
     </Routes>
 
   )

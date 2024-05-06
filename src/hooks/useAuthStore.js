@@ -59,8 +59,9 @@ export const useAuthStore = () => {
     }
   }
 
-  //esta fn se llama en el appRouter,
+  //esta fn se llama en el AppRouter,
   const checkAuthToken = async () => { //asincrona por que tengo que llegar al backend
+
     const token = localStorage.getItem('token');
     if (!token) return dispatch(onLogout());
 
@@ -71,11 +72,19 @@ export const useAuthStore = () => {
       dispatch(onLogin({ name: data.name, uid: data.uid })); //la accion deonligion esta esperando un payload y este es el ususaiio del authSlice. en mi resp voy a tener el user:osea name y el uid: que seria la data , si todo asale ok es lo que se va a grabar 
 
     } catch (error) {
-      localStorage.clear();
+      localStorage.clear(); //limpia lo queesta en el localStorage  
       dispatch(onLogout());
 
     }
   }
+
+
+  //* fn logout - se usa en el NavBar
+  const startLogout = () => {
+    localStorage.clear();  //borra lo uqe este en el storage.. los tokens, fechas de inicializacion etc
+    dispatch(onLogout()); //el onLogout esta en el authSlice.js,, uqe borra el usuario y pone el error mesage basaso en el payload, como se se manda nada,, llega undefined
+  }
+
 
   return {
     //*properties - que voy a exponer al mundo exterior jaja
@@ -86,6 +95,7 @@ export const useAuthStore = () => {
     //* metodos - acciones que van a poder llamar para interactuar con nuestro store (OTROS DESARROLLADORES)
     checkAuthToken,
     startLogin,
+    startLogout,
     startRegister,
 
   }
