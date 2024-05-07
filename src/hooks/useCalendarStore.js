@@ -3,13 +3,15 @@
 
 import { useDispatch, useSelector } from "react-redux";
 import { onAddNewEvent, onDeleteEvent, onSetActiveEvent, onUpdateEvent } from "../store/calendar/calendarSlice";
+import calendarApi from "../api/calendarApi";
 
 
 export const useCalendarStore = () => {
 
+
   const dispatch = useDispatch();
   const { events, activeEvent } = useSelector(state => state.calendar);
-
+  const { user } = useSelector(state => state.auth);
 
   const setActiveEvent = (calendarEvent) => { //me permitira hacer facil el dispatch de la accion del evento en el calendarSlice.js
     dispatch(onSetActiveEvent(calendarEvent))
@@ -17,12 +19,17 @@ export const useCalendarStore = () => {
 
   //forma sin usar thunks - usando fns sincronas
   const startSavingEvent = async (calendarEvent) => {  //va a iniciar el proceso de grabacion
-    //todo: llegar al back
-    //todo bien
-    if (calendarEvent._id) { //tiene el id, esta actualizando 
+    //todo:Update Event
+
+
+    if (calendarEvent._id) {
+      //tiene el id, esta actualizando 
       dispatch(onUpdateEvent({ ...calendarEvent })); //se manda el payload que seria l calendar event, {se rompel a referencia haceiendo el spread} para asegurar que se esta mandando un nuevo objeto 
-    } else { //esta creando
-      dispatch(onAddNewEvent({ ...calendarEvent, _id: new Date().getTime() })); //le mando el payload, ese tiene que se el evento del calendario listo
+    } else {
+      //esta creando
+      const { data } = await calendarApi.post('/events', calendarEvent) // LLEGAR AL BACKEND - calendar api llega al path, intercepta
+      // console.log({data});
+      dispatch(onAddNewEvent({ ...calendarEvent, id: data.evento.id, user })); //le mando el payload, ese tiene que se el evento del calendario listo. como ya tenemos la data se solicita la del evento. se proporciona el user tomado del store. (tomar el usuario uqe esta autenticado)
     }
   }
 

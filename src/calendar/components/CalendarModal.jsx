@@ -33,9 +33,9 @@ Modal.setAppElement('#root'); //la informacion q contiene, es la info del ELEMEN
 
 export const CalendarModal = () => {
 
-  const { isDateModalOpen,closeDateModal } = useUiStore(); //propiedad fn en es useUiStore
+  const { isDateModalOpen, closeDateModal } = useUiStore(); //propiedad fn en es useUiStore
   const { activeEvent, startSavingEvent } = useCalendarStore(); //lo uso en el submit
-  
+
   const [formSubmitted, setformSubmitted] = useState(false); //Si el titulo es incorrecto no me permita postear-submit // como esta en false. no se ha hecho el submit del formulario, y va a cambiar cuando la persona intente subir el formulario
 
 
@@ -51,24 +51,24 @@ export const CalendarModal = () => {
   });
 
   const titleClass = useMemo(() => { // este hook lo uso en el input, para dar el color verdeo rojo uqeme informa si el  titulo cumple con las condiciones
-     if (!!formSubmitted) return ''; //si formsubmit.. no se ha disparado, entonces return string vacio, si se disp.
+    if (!!formSubmitted) return ''; //si formsubmit.. no se ha disparado, entonces return string vacio, si se disp.
 
-      return( formValues.title.length > 2 )
-        ?'is-valid'
-        :'is-invalid';
+    return (formValues.title.length > 2)
+      ? 'is-valid'
+      : 'is-invalid';
 
-    }, [ formValues.title, formSubmitted]); //2 dependencias 1.vuelve a memorizar si el titulo cambia 2. si el formSubmitted cambia 
-      //el valor del tittle class se va a guardar solo si el titulo o el formSubmitt cambia  
+  }, [formValues.title, formSubmitted]); //2 dependencias 1.vuelve a memorizar si el titulo cambia 2. si el formSubmitted cambia 
+  //el valor del tittle class se va a guardar solo si el titulo o el formSubmitt cambia  
 
 
-      useEffect(() => {
-        if (activeEvent !== null){
-          setformValues({ ...activeEvent }) //fn del useState.. el spread rompe la ref... pasando las propiedades y creando un nuevo evento 
+  useEffect(() => {
+    if (activeEvent !== null) {
+      setformValues({ ...activeEvent }) //fn del useState.. el spread rompe la ref... pasando las propiedades y creando un nuevo evento 
 
-        }
+    }
 
-      }, [ activeEvent]) //dependencia, el activeEvent, se toma del useCalendarStore. este efecgto se va a disparar cada vez que la nota cambie. PERO !! SI ES NULL 
-      
+  }, [activeEvent]) //dependencia, el activeEvent, se toma del useCalendarStore. este efecgto se va a disparar cada vez que la nota cambie. PERO !! SI ES NULL 
+
 
   //asi actualiuzo el valor que viene el el target, lo uso en el titulo y en notes . con el onchange
   const onInputChanged = ({ target }) => {  //recibo el (event).. pero se va a desestructurar de aho el target ({ target})
@@ -93,7 +93,7 @@ export const CalendarModal = () => {
   }
 
   //posteo del formulario - va a recibirel evento del formulario, este se le manda al onSubit del Formulario. asi no hace refresh completo en las fechas y horario
-  const onSubmit =async (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault(); //detener la propagacion  
     setformSubmitted(true); //la persona trato de hacer el posteo, por eso se deja en true
 
@@ -111,14 +111,10 @@ export const CalendarModal = () => {
     console.log(formValues);
 
     //todo 
-    await startSavingEvent(formValues); //si doso sale bien, (voy a llamar el formValues "que es el evento del calendario"
+    await startSavingEvent(formValues); //aca se manda tooda la informacion del formulario, pero se manda directamente al useCalendarStore .. si doso sale bien, (voy a llamar el formValues "que es el evento del calendario"
     //cerrar el modal
     closeDateModal();
     setformSubmitted(false); //se deja en false para que cuando se grabe el titulo uqede en si estado ok
-
-
-
-    
 
   }
 
@@ -174,7 +170,7 @@ export const CalendarModal = () => {
           <label>Titulo y notas</label>
           <input
             type="text"
-            className={ `form-control ${titleClass}` } //punta rojo el cuadro, se va a controlar el is invalid con el use memo 
+            className={`form-control ${titleClass}`} //punta rojo el cuadro, se va a controlar el is invalid con el use memo 
             placeholder="Título del evento"
             name="title"
             autoComplete="off"
