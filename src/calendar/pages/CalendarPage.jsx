@@ -2,7 +2,7 @@
 //AppRouter tiene la validacion de si esta o no auntenticado
 //se hace la instalacion y config de React-big-calendar https://www.npmjs.com/package/react-big-calendar?activeTab=readme
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Calendar } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css'; // doc CSS de react-big-calendar
 
@@ -24,7 +24,7 @@ import { FabDeleteEvent } from '../components/FabDeleteEvent';
 export const CalendarPage = () => {
   
   const{ openDateModal} = useUiStore(); //hook importado para el doble click, y voy a usar el metodo openDateModal, lo voy as usar en el evento onDoubleClik
-  const {events, setActiveEvent } = useCalendarStore();
+  const {events, setActiveEvent, startLoadingEvents } = useCalendarStore(); //carga mis eventos.. 
 
   const [lastView, setlastView] = useState(localStorage.getItem('lastView') || 'month');//se coloca en el local storage para que almacene el valor requrido que esta en el onView
 
@@ -62,7 +62,9 @@ export const CalendarPage = () => {
   }
 
 
-
+  useEffect(() => {    //se va a dispratar apenas se carga el componente, con un use effect
+    startLoadingEvents()
+  }, []) //arreglo de dependencias vacio poruqe solo lo voy a mandat una vez
 
   return (
     <>

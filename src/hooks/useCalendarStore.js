@@ -4,6 +4,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { onAddNewEvent, onDeleteEvent, onSetActiveEvent, onUpdateEvent } from "../store/calendar/calendarSlice";
 import calendarApi from "../api/calendarApi";
+import { convertEventsToDateEvents } from "../helpers/convertEventsToDateEvents";
 
 
 export const useCalendarStore = () => {
@@ -38,6 +39,19 @@ export const useCalendarStore = () => {
     dispatch(onDeleteEvent());
   }
 
+  const startLoadingEvents = async()  => { //FN USADA EN CalendarPage.jsx  como va hasta el back es Asyncrona, 
+    try {
+      const { data } = await calendarApi.get('/events');   //hacer una peticion al back de trear la data, mediante una peticion get, con el endpoint o "ruta" de envents del backend. calendar api tiene la base de la tura configurada con vite
+      // console.log({data});
+      const events = convertEventsToDateEvents( data.eventos); //el argumento es, data.eventos por uqe en el back esta en esp.
+      console.log(events);
+
+    } catch (error) {
+      console.log('Error cargando eventos');
+      console.log(error);
+    }
+  }
+
   return {
     //*propiedades
     activeEvent,
@@ -48,6 +62,7 @@ export const useCalendarStore = () => {
     startDeletingEvent, //retornar el dlete event
     setActiveEvent, //voy a llamar este evento conl el la accion(payload) que esta esperando
     startSavingEvent, //lo regresamos del useCalendarStore, lo va a llamar en el CalendarModal
+    startLoadingEvents, //se dispara como un efecto, con el useEffect en calendar page
   }
 
 }
