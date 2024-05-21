@@ -9,8 +9,8 @@ export const convertEventsToDateEvents = (events = []) => { //recibo los eventos
   
   return events.map(  event => { //regresa los eventos cuyas fechas tienen fecha tipo Date 
 
-    event.start = parseISO( event.start);  //para convertir un string a una fecha se usa el parsISO , es un pauqete de fns
     event.end = parseISO( event.end);
+    event.start = parseISO( event.start);  //para convertir un string a una fecha se usa el parsISO , es un pauqete de fns
     return event; //regresso el evento nuevamente
   }); 
 }

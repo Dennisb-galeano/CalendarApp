@@ -24,7 +24,7 @@ import { FabDeleteEvent } from '../components/FabDeleteEvent';
 export const CalendarPage = () => {
   
   const{ openDateModal} = useUiStore(); //hook importado para el doble click, y voy a usar el metodo openDateModal, lo voy as usar en el evento onDoubleClik
-  const {events, setActiveEvent, startLoadingEvents } = useCalendarStore(); //carga mis eventos.. 
+  const {events, setActiveEvent, startLoadingEvents } = useCalendarStore(); //carga mis eventos.. , se va a disparar como un efecto, cuando se cargue el componente se va a disparar (startLoadingEvents)
 
   const [lastView, setlastView] = useState(localStorage.getItem('lastView') || 'month');//se coloca en el local storage para que almacene el valor requrido que esta en el onView
 
@@ -59,6 +59,7 @@ export const CalendarPage = () => {
 
   const onViewchanged = (event) => { //cuando cambia la vista ,, se usa el State
     localStorage.setItem('lastView', event); //evento es "mes, dia o semana... "
+    setlastView( event )
   }
 
 

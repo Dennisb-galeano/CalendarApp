@@ -2,16 +2,16 @@
 // es el encargado de CUALQUIER INTERACCION uqe vaya a hacer con el store. asi se centraliza la logica. los demás componentes solo van a utilizar la informacion que este exporta 
 
 import { useDispatch, useSelector } from "react-redux";
-import { onAddNewEvent, onDeleteEvent, onSetActiveEvent, onUpdateEvent } from "../store/calendar/calendarSlice";
-import calendarApi from "../api/calendarApi";
+import { onAddNewEvent, onDeleteEvent, onLoadEvents, onSetActiveEvent, onUpdateEvent } from "../store/calendar/calendarSlice";
 import { convertEventsToDateEvents } from "../helpers/convertEventsToDateEvents";
+import { calendarApi } from "../api";
 
 
 export const useCalendarStore = () => {
 
 
   const dispatch = useDispatch();
-  const { events, activeEvent } = useSelector(state => state.calendar);
+  const { events, activeEvent } = useSelector(state => state.calendar); //useSelector, permite extraer datos del store
   const { user } = useSelector(state => state.auth);
 
   const setActiveEvent = (calendarEvent) => { //me permitira hacer facil el dispatch de la accion del evento en el calendarSlice.js
@@ -28,8 +28,8 @@ export const useCalendarStore = () => {
       dispatch(onUpdateEvent({ ...calendarEvent })); //se manda el payload que seria l calendar event, {se rompel a referencia haceiendo el spread} para asegurar que se esta mandando un nuevo objeto 
     } else {
       //esta creando
-      const { data } = await calendarApi.post('/events', calendarEvent) // LLEGAR AL BACKEND - calendar api llega al path, intercepta
-      // console.log({data});
+      const { data } = await calendarApi.post('/events', calendarEvent); // LLEGAR AL BACKEND - calendarApi llega al path, hasta /api por lo cual si queremos llegar a los eventos solo es necesario "/events". el calendarApi esta incrustando mediante interceptores el Token, asi, solo tengo que mandar a llamar el psot, y la informacion uqr me pide el bakcend, en este caso la informacion que tiene el calendar event
+      console.log({ data });
       dispatch(onAddNewEvent({ ...calendarEvent, id: data.evento.id, user })); //le mando el payload, ese tiene que se el evento del calendario listo. como ya tenemos la data se solicita la del evento. se proporciona el user tomado del store. (tomar el usuario uqe esta autenticado)
     }
   }
@@ -39,12 +39,16 @@ export const useCalendarStore = () => {
     dispatch(onDeleteEvent());
   }
 
-  const startLoadingEvents = async()  => { //FN USADA EN CalendarPage.jsx  como va hasta el back es Asyncrona, 
+
+  const startLoadingEvents = async () => { //FN USADA EN CalendarPage.jsx  como va hasta el back es Asyncrona, 
     try {
+      
       const { data } = await calendarApi.get('/events');   //hacer una peticion al back de trear la data, mediante una peticion get, con el endpoint o "ruta" de envents del backend. calendar api tiene la base de la tura configurada con vite
-      // console.log({data});
-      const events = convertEventsToDateEvents( data.eventos); //el argumento es, data.eventos por uqe en el back esta en esp.
-      console.log(events);
+      console.log({data});
+      
+      const events = convertEventsToDateEvents(data.eventos); //el argumento es, data.eventos por uqe en el back esta en esp.
+      dispatch(onLoadEvents(events)); //reducer creado en el calendar Slice, se mandan los eventos que ya han sido procesados y tienen la fecha
+      // console.log(events);
 
     } catch (error) {
       console.log('Error cargando eventos');
