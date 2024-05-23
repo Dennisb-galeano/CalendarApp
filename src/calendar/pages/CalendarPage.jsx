@@ -77,7 +77,7 @@ export const CalendarPage = () => {
         events={events} //cambiar el eventr list con el que viene por mis propios eventos, con la const events
         defaultView={lastView} //AL RECARGAR colocar por defecto la view de agenda (dia, semana,mes) o con el lastView uqe se creo con un STATE, me mantiene el estado de la ultima pag en la que estuve " mes, dia año..."
         startAccessor="start"
-        endAccessor="final"
+        endAccessor="end"
         style={{ height: 500 }} //calcule el 100% del view hight y restele 80px  '100vh - 80px'
         messages={getMessagesEs()}  //fn en los helper getMessages.js
         eventPropGetter={eventStyleGetter} //el evento del calendario me muestra uqe eventos se disparan con ella

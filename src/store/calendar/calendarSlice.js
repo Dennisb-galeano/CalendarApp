@@ -46,7 +46,7 @@ export const calendarSlice = createSlice({
     //si tenemos una nota activa, que la elimine
     onDeleteEvent: (state) => { //no es necesario el payload por uqe la eliminacion es elimiar la nota activa 
       if (state.activeEvent) { //si no tenemos una nota activa no debemos llegar al siguiente punto ( event => event._id !== state.activeEvent._id) por que genera un error en consola
-        state.events = state.events.filter( event => event._id !== state.activeEvent._id ); //regresa todos los eventos cuyo event._id sea diferente al state.active.... regresa todos los eventos cuyo id sea diferente al de la nota activa. entonces se va a eliminar del arreglo
+        state.events = state.events.filter( event => event.id !== state.activeEvent.id ); //regresa todos los eventos cuyo event._id sea diferente al state.active.... regresa todos los eventos cuyo id sea diferente al de la nota activa. entonces se va a eliminar del arreglo
         state.activeEvent = null; // pra no tener ninguna nota activa
       }
     },
