@@ -5,6 +5,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import calendarApi from "../api/calendarApi";
 import { clearErrorMessage, onChecking, onLogin, onLogout } from "../store/authSlice"; //pone la app en un esrado de carga
+import { onLogoutCalendar } from "../store/calendar/calendarSlice";
 
 
 export const useAuthStore = () => {
@@ -82,6 +83,7 @@ export const useAuthStore = () => {
   //* fn logout - se usa en el NavBar
   const startLogout = () => {
     localStorage.clear();  //borra lo uqe este en el storage.. los tokens, fechas de inicializacion etc
+    dispatch( onLogoutCalendar() );
     dispatch(onLogout()); //el onLogout esta en el authSlice.js,, uqe borra el usuario y pone el error mesage basaso en el payload, como se se manda nada,, llega undefined
   }
 
