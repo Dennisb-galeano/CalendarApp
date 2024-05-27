@@ -47,9 +47,19 @@ export const useCalendarStore = () => {
 
   }
 
-  const startDeletingEvent = () => { // fn para mandar hacer el dispatch de esa accion "vorrar el evento "nota""
+  const startDeletingEvent = async( ) => { // fn para mandar hacer el dispatch de esa accion "borrar el evento "nota""
     //TODO llegar al back 
-    dispatch(onDeleteEvent());
+    try {
+        await calendarApi.delete( ( `/events/${ activeEvent.id}` )); //el calendar Evento no se recibe como argumento, en lugar de eso el activeEvent
+        dispatch( onDeleteEvent() );
+        
+      
+    } catch (error) {
+      console.log(error);
+      Swal.fire("Error de usuario", error.response.data.msg, "error" ); // este mensaje viene del backend, controllers error.response.data.msg
+    }
+
+
   }
 
 
