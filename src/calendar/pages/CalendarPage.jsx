@@ -15,6 +15,7 @@ import { useUiStore } from '../../hooks/useUiStore';
 import { useCalendarStore } from '../../hooks/useCalendarStore';
 import { FabAddNew } from '../components/FabAddNew';
 import { FabDeleteEvent } from '../components/FabDeleteEvent';
+import { useAuthStore } from '../../hooks/useAuthStore';
 
 
 //se le pueden agregar los eventos con la data que desee, la UNICA OBLIGATORIA ES EL TITTLE, EL START Y EL END
@@ -22,6 +23,8 @@ import { FabDeleteEvent } from '../components/FabDeleteEvent';
 
 
 export const CalendarPage = () => {
+
+  const { user } = useAuthStore();//el usuario conectado esta en el store
   
   const{ openDateModal} = useUiStore(); //hook importado para el doble click, y voy a usar el metodo openDateModal, lo voy as usar en el evento onDoubleClik
   const {events, setActiveEvent, startLoadingEvents } = useCalendarStore(); //carga mis eventos.. , se va a disparar como un efecto, cuando se cargue el componente se va a disparar (startLoadingEvents)
@@ -30,11 +33,15 @@ export const CalendarPage = () => {
 
 
   //esta fn me maneja el estilo de los eventos del calendario
+
   const eventStyleGetter = (event, start, final, isSelected) => { //son los nombres de los arg qie se quieren dar, estan definidos en el calendar
     // console.log({event,start, final, isSelected});
+    // console.log(event); aca vemos el id del usuario del evento. "quien creo el evento"
 
-    const style = {
-      backgroundColor: '#020819',
+    const isMyEvent = ( user.uid === event.user._id) || ( user.uid === event.user.uid)  // event.user._id asi lo encontramos en el evento, la otra condicion se hace asi para no cambiar nada en el backend, para uqe regrese el uid, el _id lo regresa directamente el endpoint, y el uid si realizamos alguna actualizacion
+
+    const style = { //este es el estilo de le aplico a los mensajes o eventos creados
+      backgroundColor: isMyEvent ? '#020819' : '#465660',
       borderRadious: '1px',
       opacity: 0.8,
       color: '#44F8EC',
