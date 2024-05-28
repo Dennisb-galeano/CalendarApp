@@ -34,18 +34,21 @@ export const CalendarPage = () => {
 
   //esta fn me maneja el estilo de los eventos del calendario
 
-  const eventStyleGetter = (event, start, final, isSelected) => { //son los nombres de los arg qie se quieren dar, estan definidos en el calendar
+  const eventStyleGetter = (event, start, final, isSelected) => { //coge el estilo del evento.  son los nombres de los arg qie se quieren dar, estan definidos en el calendar
     // console.log({event,start, final, isSelected});
     // console.log(event); aca vemos el id del usuario del evento. "quien creo el evento"
 
-    const isMyEvent = ( user.uid === event.user._id) || ( user.uid === event.user.uid)  // event.user._id asi lo encontramos en el evento, la otra condicion se hace asi para no cambiar nada en el backend, para uqe regrese el uid, el _id lo regresa directamente el endpoint, y el uid si realizamos alguna actualizacion
+    const isMyEvent = ( user.uid === event.user._id) || ( user.uid === event.user.uid);
+    
+
+    // event.user._id asi lo encontramos en el evento, la otra condicion se hace asi para no cambiar nada en el backend, para uqe regrese el uid, el _id lo regresa directamente el endpoint, y el uid si realizamos alguna actualizacion
 
     const style = { //este es el estilo de le aplico a los mensajes o eventos creados
-      backgroundColor: isMyEvent ? '#020819' : '#465660',
+      backgroundColor: isMyEvent ? '#020819' : '#000000',
       borderRadious: '1px',
-      opacity: 0.8,
+      opacity: isSelected? 1 : 0.8, //isSelected: Si esta seleccionado no da opacidad, si no lo esta la opacidad mayor
       color: '#44F8EC',
-    }
+    };
 
     return {
       style

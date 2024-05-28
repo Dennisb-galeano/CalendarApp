@@ -41,7 +41,7 @@ export const useCalendarStore = () => {
       
     } catch (error) {
       console.log(error);
-      Swal.fire( 'Error al guardar', error.response.data.msg, 'error'); //vamos a recibir un axios error , con . el ultimo 'error' es el icono del swal.. que quiero que aparezca
+      Swal.fire( 'Error al guardar', error.response.data.msg, 'error'); //error al editar sin ser el creador del evento. NO SE PERMITE. vamos a recibir un axios error , con . el ultimo 'error' es el icono del swal.. que quiero que aparezca. 
     }
 
 
