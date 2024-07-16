@@ -3,6 +3,8 @@
 
 .background-image {
   display: flex;
+  min-height: 100vh;
+  background-repeat: repeat;
 }
 
 .title {
@@ -16,9 +18,10 @@
 }
 
 .login-container {
-  margin-block-end: 2%;
+  margin-block-end: 20px;
   max-width: 1170px;
   width: 100%;
+  padding: 0 20px;
 }
 
 .login-container form {
@@ -45,7 +48,9 @@
 .login-form-1,
 .login-form-2 {
   border-radius: 60px;
-  padding: 6%;
+  padding: 5%;
+  flex: 1;
+  min-width: 0; /* Prevent overflow */
 }
 
 .login-form-1 h3,
@@ -95,7 +100,7 @@
   .container-forms {
     flex-direction: column; /* (los formularios se apilan verticalmente) Cambiar a columna en pantallas pequeñas */
   }
-  
+
   .login-form-1, 
   .login-form-2 {
      margin-right: 0;  /*elimina el margen derecho y */
