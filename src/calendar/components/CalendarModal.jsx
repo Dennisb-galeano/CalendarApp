@@ -7,7 +7,7 @@ import { addHours, differenceInSeconds } from 'date-fns';
 
 import Modal from 'react-modal';
 import DatePicker, { registerLocale } from 'react-datepicker'; //componente, se ca a usar en las fechas,, registerLocale: fn que necisto para cambiar lenguaje
-import "react-datepicker/dist/react-datepicker.css"; //estilos del datePicker
+import "react-datepicker/dist/react-datepicker.css"; //estilos del datePicker( es un recuadro que permite al usuario, seleccionar una fecha mediante un " mini calendario desplegable" )
 
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
@@ -125,17 +125,18 @@ export const CalendarModal = () => {
       onRequestClose={onCloseModal} //onrequiestClose, cierra el modal picando fuera de el en cualquier lugar
       style={customStyles}
       className='modal'
-      overlayClassName='modal-fondo'
+      overlayClassName=' modal-fondo'
       closeTimeoutMS={200} //para que se cierre el modal con la animacion que defini en modal.
     >
 
-
-      <h1> Nuevo evento </h1>
+      <div className="bg-dark text-white text-center p-1 rounded">
+        <h1> Nuevo evento </h1>
+      </div>
       <hr />
       <form className="container" onSubmit={onSubmit}>
 
-        <div className="form-group mb-2">
-          <label>Fecha y hora inicio</label>
+        <div className="form-group mb-2 mt-4">
+          <label className="modal-fechas m-2" > Fecha y hora inicio</label>
           <DatePicker   /*componente importade de paquete, y enviarle info  */
             selected={formValues.start} //selected(fecha seleccionada) state
             onChange={(event) => onDateChanged(event, 'start')} //esra fn, me actualiza el valor selec en el calendario.Datepicker tiene el onchenge me va a dar el evento, uqe es la fecha que yo necesito llamar, el valor de la nueva fecha seleccioanda, creo fn onDateChanged, uqe recibe el evento(nueva fecha), el start o el end(changing)
@@ -150,8 +151,8 @@ export const CalendarModal = () => {
           />
         </div>
 
-        <div className="form-group mb-2">
-          <label>Fecha y hora fin</label>
+        <div className=" modal-fechas form-group mb-2">
+          <label className="m-2"> Fecha y hora fin</label>
           <DatePicker   /*componente importade de paquete, y enviarle info  */
             minDate={formValues.start}//fecha minima a seleccionar
             selected={formValues.end} //selected(fecha seleccionada) state
@@ -166,7 +167,7 @@ export const CalendarModal = () => {
         </div>
 
         <hr />
-        <div className="form-group mb-2">
+        <div className="modal-fechas form-group mb-2">
           <label>Titulo y notas</label>
           <input
             type="text"
@@ -177,7 +178,10 @@ export const CalendarModal = () => {
             value={formValues.title}
             onChange={onInputChanged}
           />
-          <small id="emailHelp" className="form-text text-muted">Una descripción corta</small>
+        </div>
+
+        <div className='form-group mt-4 mb-2'>
+          <small id="emailHelp" className="form-text text-muted">Descripción corta del evento</small>
         </div>
 
         <div className="form-group mb-2">
@@ -192,19 +196,23 @@ export const CalendarModal = () => {
 
 
           ></textarea>
-          <small id="emailHelp" className="form-text text-muted">Información adicional</small>
         </div>
 
         <button
           type="submit"
-          className="btn btn-outline-primary btn-block"
+          className="mt-3 btn btn-outline-dark btn-block"
         >
-          <i className="far fa-save"></i>
-          <span> Guardar</span>
+          <div>
+            <i className="far fa-save"></i>
+            <span
+
+
+            > Guardar</span>
+          </div>
         </button>
 
       </form>
     </Modal>
 
-  )
-}
+  );
+};

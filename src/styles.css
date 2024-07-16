@@ -70,6 +70,9 @@ button:focus-visible {
 } 
 
 
+/* calendar */
+
+
 /* Modal */
 .ReactModalPortal > div{
   opacity: 0;
@@ -84,7 +87,7 @@ button:focus-visible {
 }
 
 .modal-fondo {
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(6, 11, 14, 80%);
   bottom: 0;
   left: 0;
   right: 0;
@@ -101,14 +104,24 @@ button:focus-visible {
 }
 
 .modal {
-  background: white;
+
+  background: #eaeaea;
   border-radius: 5px;
-  color: rgb(51, 51, 51);
+  color: rgb(31, 32, 33);
   display: inline;
   max-height: 620px;
   max-width: 500px;
   outline: none;
   padding: 10px;
+}
+
+.modal-fechas{
+  font-weight: 500; 
+
+}
+
+.background-modal{
+  background-image: url('../src/assets/calendarImage.jpg');
 }
 
 /* fab ( floating action buttom) esta en FabAddNew.jsx */
@@ -130,3 +143,26 @@ button:focus-visible {
     width: 70px;
     height: 70px;
   }
+
+  /* Celdas dias festivos - Calendario */
+
+.date-cell {
+  display: flex;
+  flex: 1;
+  border-left: 1px solid #DDD;
+}
+
+.date-cell.holiday {
+  font-style: italic;
+  font-size: small;
+  font-weight: bold;
+  background-color: #de5d4f31;
+
+  padding-top: 2.5%;
+  color: #00000069;
+}
+
+
+.date-cell.normal {
+  background-color: #fff;
+}

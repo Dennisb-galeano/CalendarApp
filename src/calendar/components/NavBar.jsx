@@ -2,11 +2,11 @@
 //el navbar lo va a renderizar Calendar Page
 //se esta usando font-awesone, Los íconos de Font Awesome se colocan usando el prefijo fas y el nombre del ícono.
 
-import { useAuthStore } from "../../hooks/useAuthStore"
+import { useAuthStore } from "../../hooks/useAuthStore";
 
 export const NavBar = () => {
 
-   const { startLogout, user } = useAuthStore(); // se encarga de los dispatch , selector etc.. el user es el uqe tenesmo en el Store
+  const { startLogout, user } = useAuthStore(); // se encarga de los dispatch , selector etc.. el user es el uqe tenesmo en el Store
   return (
     <>
       <div className="navbar navbar-dark bg-dark mb-4 px-4">
