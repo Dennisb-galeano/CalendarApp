@@ -114,3 +114,23 @@ El middleware es software que permite uno o más tipos de comunicación o conect
     axios permite configurar interceptores: 
       permiten interceptar las peticiones. las que van al back o las que regresan.
       
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::...
+
+- AL FINALIZAR EL PROYECTO
+  - bajar los proyectos del calendar y calendar_backend
+    - 10-calendar  
+      - npm run build  
+      - la carpeta dist que me genera el build (Index y assets)
+        copiar archivos
+
+        pegar en:
+    - 10-calendar_backend
+      - Puplic
+
+  de esta manera los archivos de React calendar, estran en el backend (tiene la aplicacion de react)
+    - Correr en el puerto del back, asi correra la aplicacion completa (en produccion)
+
+:::::::..
+Desplegar el back a railWay
+  - se cambia en .env por el link que me genero railway, que se encuentra en settings, en networking "Public Networking "  Public Networking
+  - se realiza nuevamente proceso LINEA 119 " AL FINALIZAR PROYECTO" para desplegar nuevamente. 
